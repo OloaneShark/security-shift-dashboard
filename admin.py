@@ -1,4 +1,8 @@
 
+from dotenv import load_dotenv
+
+import os
+
 from models import Employee, Incident
 
 from reports import view_shift_report
@@ -17,7 +21,9 @@ from data import (
     )
 
 
-MASTER_PASSWORD = "admin123"
+load_dotenv(".env")
+
+MASTER_PASSWORD = os.getenv("MASTER_PASSWORD")
 
 
 def check_admin_password():
