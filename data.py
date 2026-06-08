@@ -71,7 +71,36 @@ def save_incidents(incidents):
 
     with open("incidents.json", "w") as file:
         json.dump(incident_data, file, indent=4)
+        
+
+def load_schedules():
+    try:
+        with open("schedules.json", "r") as file:
+            return json.load(file)
+    except (FileNotFoundError, json.JSONDecodeError):
+        return []
+
+
+def save_schedules(schedules):
+    with open("schedules.json", "w") as file:
+        json.dump(schedules, file, indent=4)
+
+
+def load_time_logs():
+    try:
+        with open("time_logs.json", "r") as file:
+            return json.load(file)
+    except (FileNotFoundError, json.JSONDecodeError):
+        return []
+
+
+def save_time_logs(time_logs):
+    with open("time_logs.json", "w") as file:
+        json.dump(time_logs, file, indent=4)
 
 
 employees = load_employees()
 incidents = load_incidents()
+schedules = load_schedules()
+time_logs = load_time_logs()
+

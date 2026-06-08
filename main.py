@@ -1,11 +1,20 @@
 
 from models import Employee, Incident
 
-from data import employees, incidents
-
 from reports import view_shift_report
 
-from data import employees, incidents, save_employees, save_incidents
+from datetime import datetime
+
+from data import (
+    employees,
+    incidents,
+    schedules,
+    time_logs,
+    save_employees,
+    save_incidents,
+    save_schedules,
+    save_time_logs
+    )
 
 def add_employee():
     name = input("Employee name: ").strip()
@@ -100,6 +109,71 @@ def view_shift_report():
         print(incident)
 
 
+def add_schedule():
+    name = input("Employee name: ").strip()
+    date = input("Date: ").strip()
+    start_time = input("Start time: ").strip()
+    end_time = input("End time: ").strip()
+    post = input("Post/location: ").strip()
+
+    schedule = {
+        "name": name,
+        "date": date,
+        "start_time": start_time,
+        "end_time": end_time,
+        "post": post
+    }
+
+    schedules.append(schedule)
+    save_schedules(schedules)
+
+    print("Schedule added.")
+    
+    
+def view_schedules():
+    if not schedules:
+        print("No schedules found.")
+        return
+
+    for schedule in schedules:
+        print(f"\nEmployee: {schedule['name']}")
+        print(f"Date: {schedule['date']}")
+        print(f"Time: {schedule['start_time']} - {schedule['end_time']}")
+        print(f"Post: {schedule['post']}")
+        
+        
+def clock_in_time_log():
+    name = input("Who is clocking in? ").strip()
+
+    log = {
+        "name": name,
+        "date": datetime.now().strftime("%Y-%m-%d"),
+        "clock_in": datetime.now().strftime("%H:%M"),
+        "clock_out": None
+    }
+
+    time_logs.append(log)
+    save_time_logs(time_logs)
+
+    print(f"{name} clocked in.")
+    
+    
+def clock_out_time_log():
+    name = input("Who is clocking out? ").strip()
+
+    for log in reversed(time_logs):
+        if log["name"].lower() == name.lower() and log["clock_out"] is None:
+            log["clock_out"] = datetime.now().strftime("%H:%M")
+            save_time_logs(time_logs)
+            print(f"{name} clocked out.")
+            return
+
+    print("No active clock-in found.")
+    
+    
+
+
+
 def main():
     while True:
         print("\nSecurity Shift Dashboard")
@@ -110,7 +184,11 @@ def main():
         print("5. Log incident")
         print("6. Remove incident")
         print("7. View shift report")
-        print("8. Exit")
+        print("8. Add schedule")
+        print("9. View schedules")
+        print("10. Clock in time log")
+        print("11. Clock out time log")
+        print("12. Exit")
 
         choice = input("Choose an option: ")
 
@@ -129,9 +207,15 @@ def main():
         elif choice == "7":
             view_shift_report()
         elif choice == "8":
+            add_schedule()
+        elif choice == "9":
+            view_schedules()
+        elif choice == "10":
+            clock_in_time_log()
+        elif choice == "11":
+            clock_out_time_log()
+        elif choice == "12":
             break
-        else:
-            print("Invalid choice.")
 
 
 main()
