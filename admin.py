@@ -94,7 +94,6 @@ def assign_employee_id():
 
 """this was added to help me check all employees on the roster
 without having to open up the employees.json file"""
-
 def view_employee_roster():
     if not employees:
         print("No employees found.")
@@ -239,19 +238,14 @@ def view_shift_report():
             print(f"Time: {incident.time}")
   
 
-def admin_menu():
+def employee_editor():
     while True:
-        print("\nAdmin Dashboard")
+        print("\nEmployee Editor")
         print("1. Add employee")
         print("2. Remove employee")
         print("3. Assign employee ID")
         print("4. View employee roster")
-        print("5. Add schedule")
-        print("6. Remove schedule")
-        print("7. View time logs")
-        print("8. Remove incident")
-        print("9. View shift report")
-        print("10. Exit")
+        print("5. Back")
 
         choice = input("Choose an option: ").strip()
 
@@ -264,16 +258,53 @@ def admin_menu():
         elif choice == "4":
             view_employee_roster()
         elif choice == "5":
+            break
+        else:
+            print("Invalid choice.")
+
+
+def schedule_editor():
+    while True:
+        print("\nSchedule Editor")
+        print("1. Add schedule")
+        print("2. Remove schedule")
+        print("3. Back")
+
+        choice = input("Choose an option: ").strip()
+
+        if choice == "1":
             add_schedule()
-        elif choice == "6":
+        elif choice == "2":
             remove_schedule()
-        elif choice == "7":
+        elif choice == "3":
+            break
+        else:
+            print("Invalid choice.")
+
+
+def admin_menu():
+    while True:
+        print("\nAdmin Dashboard")
+        print("1. Employee Editor")
+        print("2. Schedule Editor")
+        print("3. View time logs")
+        print("4. Remove incident")
+        print("5. View shift report")
+        print("6. Exit")
+
+        choice = input("Choose an option: ").strip()
+
+        if choice == "1":
+            employee_editor()
+        elif choice == "2":
+            schedule_editor()
+        elif choice == "3":
             view_time_logs()
-        elif choice == "8":
+        elif choice == "4":
             remove_incident()
-        elif choice == "9":
+        elif choice == "5":
             view_shift_report()
-        elif choice == "10":
+        elif choice == "6":
             break
         else:
             print("Invalid choice.")
