@@ -5,9 +5,10 @@ from datetime import datetime
 
 
 class Employee:
-    def __init__(self, name, role):
+    def __init__(self, name, role, employee_id=None):
         self.name = name
         self.role = role
+        self.employee_id = employee_id
         self.shifts = []
 
     def clock_in(self):

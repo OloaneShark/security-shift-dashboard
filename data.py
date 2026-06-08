@@ -11,7 +11,11 @@ def load_employees():
             employee_data = json.load(file)
 
             for item in employee_data:
-                employee = Employee(item["name"], item["role"])
+                employee = Employee(
+                    item["name"],
+                    item["role"],
+                    item.get("employee_id")
+                )
                 employee.shifts = item.get("shifts", [])
                 loaded_employees.append(employee)
 
@@ -24,11 +28,11 @@ def load_employees():
 def save_employees(employees):
     employee_data = []
 
-    for employee in employees:
-        employee_data.append({
-            "name": employee.name,
-            "role": employee.role,
-            "shifts": employee.shifts
+    employee_data.append({
+        "employee_id": employees.employee_id,
+        "name": employees.name,
+        "role": employees.role,
+        "shifts": employees.shifts
         })
 
     with open("employees.json", "w") as file:
