@@ -16,6 +16,30 @@ from data import (
     save_time_logs
     )
 
+
+MASTER_PASSWORD = "admin123"
+
+
+def check_admin_password():
+    attempts = 3
+
+    while attempts > 0:
+        password = input("Enter admin password: ").strip()
+
+        if password == MASTER_PASSWORD:
+            print("Access granted.")
+            return True
+
+        attempts -= 1
+
+        if attempts > 0:
+            print(f"Incorrect password. {attempts} attempt(s) remaining.")
+        else:
+            print("Too many failed attempts. Access denied.")
+
+    return False
+
+
 def add_employee():
     name = input("Employee name: ").strip()
     role = input("Role: ").strip()
@@ -227,4 +251,5 @@ def admin_menu():
             print("Invalid choice.")
             
             
-admin_menu()
+if check_admin_password():
+    admin_menu()
