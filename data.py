@@ -28,11 +28,12 @@ def load_employees():
 def save_employees(employees):
     employee_data = []
 
-    employee_data.append({
-        "employee_id": employees.employee_id,
-        "name": employees.name,
-        "role": employees.role,
-        "shifts": employees.shifts
+    for employee in employees:
+        employee_data.append({
+            "employee_id": employee.employee_id,
+            "name": employee.name,
+            "role": employee.role,
+            "shifts": employee.shifts
         })
 
     with open("employees.json", "w") as file:

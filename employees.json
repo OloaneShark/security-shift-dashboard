@@ -1,2 +1,8 @@
-
-[]
+[
+    {
+        "employee_id": "123456",
+        "name": "John Cena",
+        "role": "WWE",
+        "shifts": []
+    }
+]
