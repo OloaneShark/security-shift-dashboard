@@ -90,7 +90,26 @@ def assign_employee_id():
             return
 
     print("Employee not found.")
-    
+
+
+"""this was added to help me check all employees on the roster
+without having to open up the employees.json file"""
+
+def view_employee_roster():
+    if not employees:
+        print("No employees found.")
+        return
+
+    sorted_employees = sorted(
+        employees,
+        key=lambda employee: employee.name.split()[-1].lower()
+    )
+
+    print("\n--- Employee Roster ---")
+
+    for employee in sorted_employees:
+        print(f"[{employee.name}, {employee.role}, {employee.employee_id}]")
+
     
 def add_schedule():
     employee_id = input("Employee ID: ").strip()
@@ -226,12 +245,13 @@ def admin_menu():
         print("1. Add employee")
         print("2. Remove employee")
         print("3. Assign employee ID")
-        print("4. Add schedule")
-        print("5. Remove schedule")
-        print("6. View time logs")
-        print("7. Remove incident")
-        print("8. View shift report")
-        print("9. Exit")
+        print("4. View employee roster")
+        print("5. Add schedule")
+        print("6. Remove schedule")
+        print("7. View time logs")
+        print("8. Remove incident")
+        print("9. View shift report")
+        print("10. Exit")
 
         choice = input("Choose an option: ").strip()
 
@@ -242,16 +262,18 @@ def admin_menu():
         elif choice == "3":
             assign_employee_id()
         elif choice == "4":
-            add_schedule()
+            view_employee_roster()
         elif choice == "5":
-            remove_schedule()
+            add_schedule()
         elif choice == "6":
-            view_time_logs()
+            remove_schedule()
         elif choice == "7":
-            remove_incident()
+            view_time_logs()
         elif choice == "8":
-            view_shift_report()
+            remove_incident()
         elif choice == "9":
+            view_shift_report()
+        elif choice == "10":
             break
         else:
             print("Invalid choice.")
