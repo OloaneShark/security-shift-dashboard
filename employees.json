@@ -1,6 +1,12 @@
 [
     {
-        "employee_id": "123456",
+        "employee_id": "1",
+        "name": "Dennis Oloane",
+        "role": "Supervisor",
+        "shifts": []
+    },
+    {
+        "employee_id": "2",
         "name": "John Cena",
         "role": "WWE",
         "shifts": []
